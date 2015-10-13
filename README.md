@@ -1,6 +1,6 @@
 # ModelSorter
 
-用redis支持ActiveRecord的对象排序，免去在数据库中创建排序字段。
+在rails中，用redis支持ActiveRecord的对象排序，免去在数据库中创建排序字段。
 
 ## Installation
 
