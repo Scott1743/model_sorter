@@ -2,7 +2,12 @@
 require "redis-objects"
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+
 require "model_sorter"
+
+module ModelSorter
+  SORT_COLUMN = "ex_column"
+end
 
 Redis.current = Redis.new(:host => '127.0.0.1', :port => 6379)
 
@@ -31,12 +36,13 @@ describe ModelSorter do
 
   end
 
-  it "save_serial_number" do
+  it "set User's all serial_number to redis" do
     User.sort_serial_number @hsh
 
     arr = @users.map do |u|
-      u.__serial_number__.value
+      u.ex_column.value
     end
     expect(arr).to eq([5, 4, 3, 2, 1])
   end
+
 end

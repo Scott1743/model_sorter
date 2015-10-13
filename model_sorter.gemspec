@@ -5,12 +5,11 @@ require 'model_sorter/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "model_sorter"
-  spec.version       = Model::Sorter::VERSION
+  spec.version       = ModelSorter::VERSION
   spec.authors       = ["Scott1743"]
   spec.email         = ["512981271@qq.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = ""
+  spec.description   = %q{To sort the instance of ActiveRecord::Relation by Redis}
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

@@ -7,39 +7,35 @@
 Add this line to your application's Gemfile:
 
     gem 'model_sorter'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install model-sorter
-
+    
+add this to 'config/initializes/model_sorter.rb'
+    module ModelSorter
+      SORT_COLUMN = "what_column_you_want"
+    end
 ## Usage
-
-组装一个Hash：{ id: index, id: index, ... }
-
-__In your Coffee__
-
-```
-    $.ajax(
-      type:     'post',
-      url:      'update_serial_number',
-      data:     { serial_hsh: {5:1, 6:2, 8:3, 1:4, 3:5} },
-      dataType: 'text',
-      success:  (info) ->
-        # ...
-    )
-```
 
 __In your Model__
 
 ```
-    class Post < ActiveRecord::Base
-      include Redis::Objects
-      include ModelSorter::Associations
-    end
+class Post < ActiveRecord::Base
+  include Redis::Objects
+  include ModelSorter::Associations
+end
+```
+
+__In your Coffee__
+
+组装出Hash：{ id: index, id: index, ... }
+
+```
+$.ajax(
+  type:     '...',
+  url:      '...',
+  data:     { serial_hsh: {5:1, 6:2, 8:3, 1:4, 3:5} },
+  dataType: '...',
+  success:  () ->
+    # ...
+)
 ```
 
 __In your Controller__
@@ -47,17 +43,27 @@ __In your Controller__
 用sort_serial_number方法，传入hsh
 
 ```
-    def index
-      @posts = Post.sort_by!{ |p| p.__serial_number__.value }
-    end
-    
-    def update_serial_number
-      serial_hsh = params[:serial_hsh]
-      if Post.sort_serial_number(serial_hsh)
-        return render text: "success"
-      else
-        return render text: "fail"
-      end
-    end
+def index
+  @posts = Post.sort_by!{ |p| p.ur_column_name.value }
+end
+
+def update_serial_number
+  serial_hsh = params[:serial_hsh]
+  if Post.sort_serial_number(serial_hsh)
+    return render text: "success"
+  else
+    return render text: "fail"
+  end
+end
 ```
+
+## Note
+
+出现这个错误？请再看 Installation
+
+    uninitialized constant ModelSorter::SORT_COLUMN (NameError)
+    
+
+
+
 
