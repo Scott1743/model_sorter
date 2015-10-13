@@ -1,6 +1,6 @@
 # ModelSorter
 
-在Rails中，用Redis支持ActiveRecord的对象排序，免去在数据库中创建排序字段。
+用 Redis 来支持 ActiveRecord 或 DataMapper 的等 Ruby ORM 对象排序，免去在文件数据库中使用排序字段。
 
 ## Installation
 
@@ -16,7 +16,7 @@ end
 ```
 ## Usage
 
-As：需要View中配置Post结果集的对象排序（用jquery-ui.sortable等组件）。
+As：需要 View 中配置 Post 结果集的对象排序（用 jquery-ui.sortable 等组件）。
 
 __In your Model__
 
