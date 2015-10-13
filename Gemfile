@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+# coding: utf-8
+source "http://ruby.taobao.org"
 
-# Specify your gem's dependencies in model-sorter.gemspec
-gemspec
+gem "redis-objects"
+gem "rspec"

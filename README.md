@@ -1,12 +1,12 @@
-# Model::Sorter
+# ModelSorter
 
-TODO: Write a gem description
+用redis支持ActiveRecord的对象排序，免去在数据库中创建排序字段。
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'model-sorter'
+    gem 'model_sorter'
 
 And then execute:
 
@@ -18,12 +18,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+组装一个Hash：{ id: index, id: index, ... }
 
-## Contributing
+__In your Coffee__
 
-1. Fork it ( https://github.com/[my-github-username]/model-sorter/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+```
+    $.ajax(
+      type:     'post',
+      url:      'update_serial_number',
+      data:     { serial_hsh: {5:1, 6:2, 8:3, 1:4, 3:5} },
+      dataType: 'text',
+      success:  (info) ->
+        # ...
+    )
+```
+
+__In your Model__
+
+```
+    class Post < ActiveRecord::Base
+      include Redis::Objects
+      include ModelSorter::Associations
+    end
+```
+
+__In your Controller__
+
+用sort_serial_number方法，传入hsh
+
+```
+    def index
+      @posts = Post.sort_by!{ |p| p.__serial_number__.value }
+    end
+    
+    def update_serial_number
+      serial_hsh = params[:serial_hsh]
+      if Post.sort_serial_number(serial_hsh)
+        return render text: "success"
+      else
+        return render text: "fail"
+      end
+    end
+```
+
