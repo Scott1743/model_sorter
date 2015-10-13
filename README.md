@@ -8,7 +8,7 @@ Add this line to your application's Gemfile:
 
     gem 'model_sorter'
     
-Add this to 'config/initializes/model_sorter.rb'
+Name your column, add this to 'config/initializes/model_sorter.rb'
 ```
 module ModelSorter
   SORT_COLUMN = "what_column_you_want"
