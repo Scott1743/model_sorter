@@ -16,6 +16,8 @@ end
 ```
 ## Usage
 
+As：需要View中配置Post结果集的对象排序（用jquery-ui.sortable等组件）。
+
 __In your Model__
 
 ```
