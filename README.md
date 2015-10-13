@@ -63,9 +63,11 @@ end
 
 ## Note
 
-出现这个错误？请再看 Installation
+1. 出现这个错误？请再看 Installation
 
     uninitialized constant ModelSorter::SORT_COLUMN (NameError)
+    
+2. 使用 DataMapper 需有 id 字段    
     
 
 
