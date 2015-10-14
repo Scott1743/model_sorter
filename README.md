@@ -29,13 +29,19 @@ end
 
 __In your Coffee__
 
-组装出Hash：{ id: index, id: index, ... }
+组装出 Hash 
+
+    hsh: { id: index, id: index, ... }
+    
+或 Array, 按你希望的顺序由小到大
+  
+    arr: [ id, id,  ... ] 
 
 ```
 $.ajax(
   type:     '...',
   url:      '...',
-  data:     { serial_hsh: {5:1, 6:2, 8:3, 1:4, 3:5} },
+  data:     { serial_list: [5, 3, 4, 2, ...] },
   dataType: '...',
   success:  () ->
     # ...
@@ -44,7 +50,7 @@ $.ajax(
 
 __In your Controller__
 
-用sort_serial_number方法，传入hsh
+用sort_serial_number方法，传入Hash, Array, ActiveRecord::Relation ...
 
 ```
 def index
@@ -52,8 +58,11 @@ def index
 end
 
 def update_serial_number
-  serial_hsh = params[:serial_hsh]
-  if Post.sort_serial_number(serial_hsh)
+  serial_list = params[:serial_list]
+  
+  # if Post.sort_serial_number(Post.all)
+  
+  if Post.sort_serial_number(serial_list)
     return render text: "success"
   else
     return render text: "fail"
