@@ -33,7 +33,6 @@ describe ModelSorter do
       @hsh[i] = 6 - i
       i += 1
     end
-
   end
 
   it "set User's all serial_number to redis" do
@@ -43,6 +42,13 @@ describe ModelSorter do
       u.ex_column.value
     end
     expect(arr).to eq([5, 4, 3, 2, 1])
+  end
+
+  it "handle serial_number is Array" do
+    User.sort_serial_number @hsh.keys
+
+    arr = @users.sort_by{ |u| u.ex_column.value }.map{|u| u.id}
+    expect(arr).to eq([1, 2, 3, 4, 5])
   end
 
 end
